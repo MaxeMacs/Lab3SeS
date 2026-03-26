@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -56,7 +56,7 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> {
     const redirectUri = "lab3://callback";
 
     try {
-      final result = await FlutterWebAuth.authenticate(
+      final result = await FlutterWebAuth2.authenticate(
         url: "https://github.com/login/oauth/authorize?client_id=$gitClientId&redirect_uri=$redirectUri",
         callbackUrlScheme: "lab3",
       );
@@ -85,7 +85,7 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> {
     try {
       bool authenticated = await auth.authenticate(
         localizedReason: 'Scanează amprenta pentru autentificare',
-        options: const AuthenticationOptions(biometricOnly: true),
+        biometricOnly: true, // Punem parametrul direct, cum cere versiunea veche
       );
 
       if (authenticated) {
